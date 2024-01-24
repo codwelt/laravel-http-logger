@@ -12,7 +12,7 @@ class LogNonGetRequests implements LogProfile
         return in_array(strtolower($request->method()), ['post', 'put', 'patch', 'delete']);
     }
 
-    public function shouldLogResponse(Response $response): bool
+    public function shouldLogResponse($response): bool
     {
         try {
             $content = $response->getContent();

@@ -2,6 +2,7 @@
 
 namespace Spatie\HttpLogger;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
@@ -33,13 +34,13 @@ class DefaultLogWriter implements LogWriter
         ];
     }
 
-    public function logResponse(Response $response)
+    public function logResponse($response)
     {
         $message = $this->formatMessageResponse($this->getMessageResponse($response));
         Log::channel(config('http-logger.log_channel'))->log(config('http-logger.log_level', 'info'), $message);
     }
 
-    public function getMessageResponse(Response $response)
+    public function getMessageResponse($response)
     {
         return [
             'body' => $response->getContent(),
