@@ -45,7 +45,7 @@ class DefaultLogWriter implements LogWriter
         return [
             'body' => $response->getContent(),
             'headers' => $this->getSanitizer()->clean($response->headers->all(), config('http-logger.sanitize_headers')),
-            'code' => $response->status(),
+            'code' => method_exists($response,'status') ? $response->status() : (method_exists($response,'getStatusCode') ? $response->getStatusCode() : null),
         ];
     }
 
